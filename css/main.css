@@ -102,6 +102,9 @@ body {
 code {
 	font-size: .9em;
 }
+p {
+	padding: 7px 0 7px 0;
+}
 
 .container .row .col-md-3 img, .container .row .col-md-4 img {
 	width: 100%;
