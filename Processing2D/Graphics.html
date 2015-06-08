@@ -1,0 +1,94 @@
+---
+layout: page
+---
+<div class="container">
+  <div class="row">
+    <p>Since this is a game we'll need a few objects to move around the screen. In the very least, we need a player controlled ship, the enemy ship, and a projectile to fire back and forth. It's easy to imagine and in fact here are three such examples:</p>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <img style="width: auto;" src="../img/player.png" />
+    </div>
+    <div class="col-md-4">
+      <img style="width: auto;" src="../img/enemy.png" />
+    </div>
+    <div class="col-md-4">
+      <img style="width: auto;" src="../img/bullet.png" />
+    </div>
+  </div>
+  <div class="row">
+    <p>Although it's very easy to think of the shape, drawing it in a 2D coordinate system using the Processing language requires some consideration.</p>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <img src="../img/pshape-step1.png" />
+      <p>First, recall the y-axis is upside down compared to what we typically learn in school so the number line goes from negative numbers up top to positive numbers down below.</p>
+    </div>
+    <div class="col-md-3">
+      <img src="../img/pshape-step2.png" />
+      <p>We can think of the first shape as a chassis, the structural form to which we attach other shapes. In this case, we can simply create an ellipse.</p>
+      <code>ELLIPSE, -90, -40, 180, 80</code>
+    </div>
+    <div class="col-md-3">
+      <img src="../img/pshape-step3.png" />
+      <p>This is an arc drawn on top of the ellipse.</p>
+      <code>ARC, -50, -15, 100, 30, 0, PI</code>
+    </div>
+    <div class="col-md-3">
+      <img src="../img/pshape-step4.png" />
+      <p>This is another arc drawn on top of the ellipse.</p>
+      <code>ARC, -50, -50, 100, 100, PI, TWO_PI</code>
+    </div>
+  </div>
+  <div class="row">
+    <br />
+    <p>Putting it all together, we can formulate a method to draw our concept:</p>
+    <code><pre>void buildEnemyTwo() {
+    enemyTwo = createShape(GROUP);
+    fill(115,20,240); //purple
+    PShape chassis = createShape(ELLIPSE, -90, -40, 180, 80);
+    fill(20,200,255); //light blue
+    PShape dome1 = createShape(ARC, -50, -15, 100, 30, 0, PI);
+    PShape dome2 = createShape(ARC, -50, -50, 100, 100, PI, TWO_PI);
+    enemyTwo.addChild(chassis);
+    enemyTwo.addChild(dome1);
+    enemyTwo.addChild(dome2);
+    enemyTwo.scale(.3);
+}</pre></code>
+  </div>
+  <div class="row">
+    <p>We previously discussed Unified Modeling Language (UML) and took a look at a rough sketch I had drawn. Refined, this is the UML class diagram for a ShapeFactory class I proposed last week. This diagram is basically an outline of the code we want to write.</p>
+    <p><img src="../img/ShapeFactory.png" /></p>
+    <p>Given this diagram, we can easily generate the following code to match it:</p>
+    <code><pre>class ShapeFactory {
+  
+  PShape basicBullet;
+  PShape basicPlayer;
+  PShape basicEnemy;
+  
+  //the constructor - very important!
+  ShapeFactory() {
+    buildBasicBullet();
+    buildBasicPlayer();
+    buildBasicEnemy();
+  }
+  
+  PShape getBasicBullet() { return basicBullet; }
+  PShape getBasicPlayer() { return basicPlayer; }
+  PShape getBasicEnemy()  { return basicEnemy; }
+  
+  void buildBasicBullet() {
+      //your code goes here
+  }
+  
+  void buildBasicPlayer() {
+      //your code goes here
+  }
+  
+  void buildBasicEnemy() {
+      //your code goes here
+  }
+}</pre></code>
+    <p>The code you've already written to create your shapes should be inserted in the <code>//your code goes here</code> sections.</p>
+  </div>
+</div>
