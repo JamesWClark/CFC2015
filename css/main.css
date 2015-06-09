@@ -102,6 +102,9 @@ body {
 code {
 	font-size: .9em;
 }
+img {
+	max-width: 100%;
+}
 p {
 	padding: 7px 0 7px 0;
 }

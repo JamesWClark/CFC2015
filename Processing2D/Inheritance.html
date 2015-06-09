@@ -13,5 +13,14 @@ layout: page
 <div class="container">
   <p>So far we have GameController and ShapeFactory classes. Next we introduce the idea of the Sprite. In a game like Space Invaders, three obvious sprites immediately stand out. There's a player controlled ship, the enemies ships, and the projectiles they fire. While there are many enemies, many projectiles, and one player, all of these can be modeled down to two basic entities: HostileSprite and ProjectileSprite.</p>
   <p>The difference between HostileSprite and ProjectileSprite is simply the fact that the ProjectileSprite needs to check for collisions. Let's take a look at this in UML.</p>
-  <img src="../img/ClassDiagram.png" />
+  <img class="center" src="../img/ClassDiagram.png" />
+  <p>Just by looking at this UML class diagram, we are able to write some code.</p>
+  <h2>Interface - Sprite</h2>
+  <img src="../img/CSprite.png" />
+  <h2>Abstract Class - AbstractSprite</h2>
+  <img src="../img/CAbstractSprite.png" />
+  <h2>Class - HostileSprite</h2>
+  <img src="../img/CHostileSprite.png" />
+  <h2>Class - ProjectileSprite</h2>
+  <img src="../img/CProjectileSprite.png" />
 </div>
