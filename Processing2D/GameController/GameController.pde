@@ -7,6 +7,7 @@ final int screenHeight = 600;
 final int playersTeam = 1;
 final int enemiesTeam = 2;
 int playerSpeedLimit = 8;
+int enemySpeedLimit = 5;
 boolean[] keys = new boolean[3];
 ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 ArrayList<Sprite> enemies = new ArrayList<Sprite>();
@@ -49,14 +50,14 @@ void draw() {
  * SPAWN ENEMIES
  */
 void spawnEnemies() {
-  int enemyRows = 3;
-  int enemyCols = 8;
+  int radius = factory.getBasicEnemyRadius();
+  int enemyRows = 4;
+  int enemyCols = width / (4 * radius);
   for (int i = 0; i < enemyRows; i++) {
     for (int j = 0; j < enemyCols; j++) {
-      PVector position = new PVector(50+j*100, 50+i*100);
-      PVector velocity = new PVector(0, 0);
-      PShape graphic = factory.getEnemyTwo();
-      int radius = factory.getBasicEnemyRadius();
+      PShape graphic = factory.getBasicEnemy();
+      PVector position = new PVector(2*radius + 1 + j*100, 2*radius + i*100);
+      PVector velocity = new PVector(enemySpeedLimit, 0);
       HostileSprite enemy = new HostileSprite(enemiesTeam, radius, graphic, position, velocity);
       sprites.add(enemy);
       enemies.add(enemy);
@@ -142,7 +143,7 @@ void keyReleased() {
     keys[2] = false;
 }
 
-boolean isLeftBound(HostileSprite sprite) {
+boolean isLeftBound(AbstractSprite sprite) {
   int leftBoundary = 2 * sprite.radius;
   if (sprite.position.x <= leftBoundary)
     return true;
@@ -150,7 +151,7 @@ boolean isLeftBound(HostileSprite sprite) {
     return false;
 }
 
-boolean isRightBound(HostileSprite sprite) {
+boolean isRightBound(AbstractSprite sprite) {
   int rightBoundary = width - 2 * sprite.radius;
   if (sprite.position.x >= rightBoundary)
     return true;
