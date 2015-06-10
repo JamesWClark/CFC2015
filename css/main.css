@@ -100,17 +100,17 @@ body {
     font-size: 1.2em;
 }
 code {
-	font-size: .9em;
+    font-size: .9em;
 }
 img {
-	max-width: 100%;
+    max-width: 100%;
 }
 p {
-	padding: 7px 0 7px 0;
+    padding: 7px 0 7px 0;
 }
 
 .container .row .col-md-3 img, .container .row .col-md-4 img {
-	width: 100%;
+    width: 100%;
 }
 
 .not-active {
@@ -119,7 +119,7 @@ p {
 }
 
 .site-footer, .footer-push {
-	height: 155px;
+    height: 155px;
 }
 
 
