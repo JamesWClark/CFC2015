@@ -20,6 +20,9 @@ abstract class AbstractSprite implements Sprite {
   }
 
   void update() {
+    if(this != player) {
+      
+    }
     position.add(velocity);
   }
 

@@ -8,7 +8,6 @@ final int playersTeam = 1;
 final int enemiesTeam = 2;
 int playerSpeedLimit = 8;
 boolean[] keys = new boolean[3];
-PImage bg;
 ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 ArrayList<Sprite> enemies = new ArrayList<Sprite>();
 ShapeFactory factory;
@@ -19,7 +18,6 @@ HostileSprite player;
  */
 void setup() {
   size(screenWidth, screenHeight, P2D);
-  bg = loadImage("space.png");
   factory = new ShapeFactory();
   spawnEnemies();
   player = spawnPlayer();
@@ -32,9 +30,9 @@ void setup() {
  */
 void draw() {
   frame.setTitle((int)frameRate + " fps");
-  background(bg);
+  background(0);
   controlPlayer();
-  if(enemies.size() > 1 && enemies.contains(player)) {
+  if (enemies.size() > 1 && enemies.contains(player)) {
     automateEnemies();
   } else {
     noLoop();
@@ -42,7 +40,7 @@ void draw() {
   }
 
   //update all sprite positions on screen
-  for (int i = 0; i < sprites.size(); i++) {
+  for (int i = 0; i < sprites.size (); i++) {
     sprites.get(i).updateAndDisplay();
   }
 }
@@ -97,10 +95,17 @@ void automateEnemies() {
  */
 void controlPlayer() {
   if (keys[0]) { //LEFT
-    player.position.x -= playerSpeedLimit;
+    if (isLeftBound(player))
+      player.position.x = 2 * player.radius;
+    else
+      player.position.x -= playerSpeedLimit;
   }
   if (keys[1]) { //RIGHT
-    player.position.x += playerSpeedLimit;
+    if (isRightBound(player)) {
+      player.position.x = width - 2 * player.radius;
+    } else {
+      player.position.x += playerSpeedLimit;
+    }
   }
   if (keys[2]) { //F
     player.fire(new PVector(0, -10));
@@ -135,5 +140,21 @@ void keyReleased() {
   }
   if (key == 'f' || key == 'F')
     keys[2] = false;
+}
+
+boolean isLeftBound(HostileSprite sprite) {
+  int leftBoundary = 2 * sprite.radius;
+  if (sprite.position.x <= leftBoundary)
+    return true;
+  else
+    return false;
+}
+
+boolean isRightBound(HostileSprite sprite) {
+  int rightBoundary = width - 2 * sprite.radius;
+  if (sprite.position.x >= rightBoundary)
+    return true;
+  else
+    return false;
 }
 

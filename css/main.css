@@ -118,6 +118,10 @@ p {
    cursor: default;
 }
 
+.site-footer, .footer-push {
+	height: 155px;
+}
+
 
 
 
