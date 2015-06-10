@@ -2,42 +2,55 @@
 /**
  * GLOBAL VARIABLES
  */
-final int screenWidth = 800;
-final int screenHeight = 600;
 final int playersTeam = 1;
 final int enemiesTeam = 2;
 int playerSpeedLimit = 8;
-int enemySpeedLimit = 5;
+int enemySpeedLimit = 4;
+int stage = 0;
+boolean lockedControls = true;
 boolean[] keys = new boolean[3];
 ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 ArrayList<Sprite> enemies = new ArrayList<Sprite>();
+ArrayList<Level> levels = new ArrayList<Level>();
+
+Level currentLevel;
 ShapeFactory factory;
 HostileSprite player;
+float playerControllerLine;
+
 
 /**
- * INITIAL SETUP - RUNS ONCE
+ * SETUP - INITIALIZE, RUNS ONCE
  */
 void setup() {
-  size(screenWidth, screenHeight, P2D);
+  size(displayWidth, displayHeight, P2D);
+  noCursor();
+  
   factory = new ShapeFactory();
-  spawnEnemies();
+  playerControllerLine = 0.85 * height;
   player = spawnPlayer();
   sprites.add(player);
   enemies.add(player);
+  
+  levels.add(new LevelOne());
+  levels.add(new LevelOne());
+  for(Level level : levels) {
+    level.levelSetup();
+  }
+  currentLevel = levels.get(0);
 }
 
 /**
- * THE MAIN DRAWING LOOP - REPEATS EVERY FRAME
+ * DRAW - THE MAIN DRAWING LOOP REPEATS EVERY FRAME
  */
 void draw() {
   frame.setTitle((int)frameRate + " fps");
   background(0);
-  controlPlayer();
-  if (enemies.size() > 1 && enemies.contains(player)) {
-    automateEnemies();
-  } else {
-    noLoop();
-    print("game over");
+  
+  currentLevel.levelDraw();
+  
+  if(!lockedControls) {
+    controlPlayer();
   }
 
   //update all sprite positions on screen
@@ -47,22 +60,10 @@ void draw() {
 }
 
 /**
- * SPAWN ENEMIES
+ * FULL SCREEN MODE
  */
-void spawnEnemies() {
-  int radius = factory.getBasicEnemyRadius();
-  int enemyRows = 4;
-  int enemyCols = width / (4 * radius);
-  for (int i = 0; i < enemyRows; i++) {
-    for (int j = 0; j < enemyCols; j++) {
-      PShape graphic = factory.getBasicEnemy();
-      PVector position = new PVector(2*radius + 1 + j*100, 2*radius + i*100);
-      PVector velocity = new PVector(enemySpeedLimit, 0);
-      HostileSprite enemy = new HostileSprite(enemiesTeam, radius, graphic, position, velocity);
-      sprites.add(enemy);
-      enemies.add(enemy);
-    }
-  }
+boolean sketchFullScreen() {
+  return true;
 }
 
 /**
@@ -74,21 +75,6 @@ HostileSprite spawnPlayer() {
   PShape graphic = factory.getBasicPlayer();
   int radius = factory.getBasicPlayerRadius();
   return new HostileSprite(playersTeam, radius, graphic, startingPosition, initialVelocity);
-}
-
-/**
- * AUTOMATE THE ENEMIES
- */
-long timeSinceLastEnemyShot = 0;
-long enemyShotDelay = 400; //ms
-void automateEnemies() {
-  long now = millis();
-  int i = (int)random(0, enemies.size());
-  HostileSprite enemy = (HostileSprite)enemies.get(i);
-  if (now > timeSinceLastEnemyShot + enemyShotDelay && enemy != player) {
-    enemy.fire(player);
-    timeSinceLastEnemyShot = now;
-  }
 }
 
 /**
