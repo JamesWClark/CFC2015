@@ -21,9 +21,7 @@ abstract class AbstractSprite implements Sprite {
 
   void update() {
     if (this != player) {
-      if (isRightBound(this))
-        velocity = new PVector(-1 * velocity.x, 0);
-      else if (isLeftBound(this))
+      if (isRightBound(this) || isLeftBound(this))
         velocity = new PVector(-1 * velocity.x, 0);
     }
     position.add(velocity);

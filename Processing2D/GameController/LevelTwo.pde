@@ -1,10 +1,10 @@
-class LevelOne extends AbstractLevel {
+class LevelTwo extends AbstractLevel {
 
   boolean intro = true;
   long timeSinceLastEnemyShot = 0;
-  long enemyShotDelay = 400; //ms
-  
-  LevelOne() {
+  long enemyShotDelay = 300; //ms
+
+  LevelTwo() {
   }
 
   void levelSetup() {
@@ -32,9 +32,8 @@ class LevelOne extends AbstractLevel {
 
   void fight() {
     automateEnemies();
-    if (levelIsComplete()) {
+    if (levelIsComplete())
       advance();
-    }
   }
 
   void spawnEnemies() {
@@ -43,9 +42,9 @@ class LevelOne extends AbstractLevel {
     int enemyCols = width / (4 * radius);
     for (int i = 0; i < enemyRows; i++) {
       for (int j = 0; j < enemyCols; j++) {
-        PShape graphic = factory.getBasicEnemy();
+        PShape graphic = factory.getEnemyTwo();
         PVector position = new PVector(2*radius + 1 + j*100, 2*radius + i*100);
-        PVector velocity = new PVector(enemySpeedLimit, 0);
+        PVector velocity = new PVector(-enemySpeedLimit * 1.5, 0);
         HostileSprite enemy = new HostileSprite(enemiesTeam, radius, graphic, position, velocity);
         sprites.add(enemy);
         enemies.add(enemy);
@@ -61,7 +60,7 @@ class LevelOne extends AbstractLevel {
     int i = (int)random(0, enemies.size());
     HostileSprite enemy = (HostileSprite)enemies.get(i);
     if (now > timeSinceLastEnemyShot + enemyShotDelay && enemy != player) {
-      enemy.fire(player, 8);
+      enemy.fire(player, 16);
       timeSinceLastEnemyShot = now;
     }
   }

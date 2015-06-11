@@ -8,6 +8,7 @@ int playerLives = 3;
 int playerSpeedLimit = 8;
 int enemySpeedLimit = 4;
 int stage = 0;
+boolean invincible = false;
 boolean lockedControls = true;
 boolean[] keys = new boolean[3];
 ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -18,7 +19,7 @@ Level currentLevel;
 ShapeFactory factory;
 HostileSprite player;
 float playerControllerLine;
-
+PShape lifeIcon;
 
 /**
  * SETUP - INITIALIZE, RUNS ONCE
@@ -26,16 +27,17 @@ float playerControllerLine;
 void setup() {
   size(displayWidth, displayHeight, P2D);
   noCursor();
-  
+
   factory = new ShapeFactory();
+  lifeIcon = factory.getBasicPlayer().getChild(0); //the chassis
   playerControllerLine = 0.85 * height;
   player = spawnPlayer();
   sprites.add(player);
   enemies.add(player);
-  
+
   levels.add(new LevelOne());
-  levels.add(new LevelOne());
-  for(Level level : levels) {
+  levels.add(new LevelTwo());
+  for (Level level : levels) {
     level.levelSetup();
   }
   currentLevel = levels.get(0);
@@ -45,18 +47,46 @@ void setup() {
  * DRAW - THE MAIN DRAWING LOOP REPEATS EVERY FRAME
  */
 void draw() {
-  frame.setTitle((int)frameRate + " fps");
-  background(0);
-  
+  background(25);
+  showPlayerLives();
+  checkEndConditions();
   currentLevel.levelDraw();
-  
-  if(!lockedControls) {
+  if (!lockedControls) {
     controlPlayer();
   }
-
   //update all sprite positions on screen
   for (int i = 0; i < sprites.size (); i++) {
     sprites.get(i).updateAndDisplay();
+  }
+}
+
+void showPlayerLives() {
+  for (int i = 0; i < playerLives; i++) {
+    shape(lifeIcon, 60 + i * 100, height - 40);
+  }
+}
+
+void checkEndConditions() {
+  if (playerLives == 0) {
+    cursor();
+    textAlign(CENTER);
+    textSize(48);
+    text("Game Over", width/2, height/2);
+    noLoop();
+  }
+  if (stage > levels.size() - 1) {
+    cursor();
+    textAlign(CENTER);
+    textSize(48);
+    text("You Beat the Game", 500, 500);
+    noLoop();
+    try {
+      Thread.sleep(5000);
+      System.exit(0);
+    } 
+    catch (InterruptedException ex) {
+      //dont' do anything
+    }
   }
 }
 
@@ -112,7 +142,7 @@ void keyPressed() {
     if (keyCode == 61440) //printScreen
       saveFrame("data/" + System.currentTimeMillis() + ".jpg");
   }
-  if (key == 'f' || key == 'F')
+  if (key == 'f' || key == 'F' || key == ' ')
     keys[2] = true;
 }
 
