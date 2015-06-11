@@ -4,22 +4,25 @@ layout: page
 <div class="jumbotron">
   <div class="container">
     <h1>Game Logic</h1>
-    <p>Some primary methods used by in our game.</p>
+    <p>Some primary methods used in our game.</p>
   </div>
 </div>
 <div class="container">
   <p>First of all, if you weren't here yesterday, you can get a copy of the updated source code here -<br />
     <a href="https://drive.google.com/file/d/0B9GvJvqcpl0IczhnTDJjVl9iSEE/view?usp=sharing" target="_blank">https://drive.google.com/file/d/0B9GvJvqcpl0IczhnTDJjVl9iSEE/view?usp=sharing</a></p>
-  <p>Now, let's enhance. First, since we added arrow keys we are now able to move our character off screen. To fix this, we add boundary detection.</p>
+  <h2>Boundary Detection</h2>
+  <h3>GameController.isLeftBound()<br />GameController.isRightBound()</h3>
   <img src="../img/code611-01.png" />
-  <p>Accordingly, we need to update our <code>controlPlayer()</code> method to include this boundary detection.</p>
+  <h3>GameController.controlPlayer()</h3>
   <img src="../img/code611-02.png" />
-  <p>How to fire.</p>
-  <img src="../img/code611-03.png" />
-  <p>Check if ready to fire</p>
-  <img src="../img/code611-04.png" />
-  <p>Check for collisions</p>
-  <img src="../img/code611-05.png" />
-  <p>Clearly, we also need to develop our ProjectileSprite class.</p>
+  <h2>Fire Projectiles</h2>
+  <h3>ProjectileSprite</h3>
   <img src="../img/code611-06.png" />
+  <h3>HostileSprite.readyToFire()</h3>
+  <img src="../img/code611-04.png" />
+  <h3>HostileSprite.fire()</h3>
+  <img src="../img/code611-03.png" />
+  <h3>AbstractSprite.isColliding()</h3>
+  <img src="../img/code611-05.png" />
+    
 </div>
