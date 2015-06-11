@@ -49,7 +49,9 @@ void setup() {
 void draw() {
   background(25);
   showPlayerLives();
-  checkEndConditions();
+  if(playerLives == 0) {
+    endGame("lose");
+  }
   currentLevel.levelDraw();
   if (!lockedControls) {
     controlPlayer();
@@ -66,27 +68,19 @@ void showPlayerLives() {
   }
 }
 
-void checkEndConditions() {
-  if (playerLives == 0) {
+void endGame(String condition) {
+  if(condition.equals("lose")) {
     cursor();
     textAlign(CENTER);
     textSize(48);
     text("Game Over", width/2, height/2);
     noLoop();
-  }
-  if (stage > levels.size() - 1) {
+  } else if(condition.equals("win")) {
     cursor();
     textAlign(CENTER);
     textSize(48);
-    text("You Beat the Game", 500, 500);
-    noLoop();
-    try {
-      Thread.sleep(5000);
-      System.exit(0);
-    } 
-    catch (InterruptedException ex) {
-      //dont' do anything
-    }
+    text("You Beat the Game", width/2, height/2);
+    noLoop();    
   }
 }
 
@@ -175,4 +169,23 @@ boolean isRightBound(AbstractSprite sprite) {
   else
     return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

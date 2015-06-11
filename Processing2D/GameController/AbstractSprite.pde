@@ -36,8 +36,6 @@ abstract class AbstractSprite implements Sprite {
     display();
   }
 
-  //http://stackoverflow.com/questions/401847/circle-rectangle-collision-detection-intersection
-  //http://cgp.wikidot.com/circle-to-circle-collision-detection
   boolean isColliding(ProjectileSprite projectile, HostileSprite hostile) {
     float dx = projectile.position.x - hostile.position.x;
     float dy = projectile.position.y - hostile.position.y;
@@ -48,4 +46,30 @@ abstract class AbstractSprite implements Sprite {
       return false;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

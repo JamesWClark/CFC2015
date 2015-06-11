@@ -21,15 +21,12 @@ class ProjectileSprite extends AbstractSprite {
     for (int i = 0; i < enemies.size (); i++) {
       HostileSprite enemy = (HostileSprite)enemies.get(i);
       if (this.shooter.team != enemy.team && isColliding(this, enemy)) {
-        if (enemy == player && invincible) {
-          //do nothing
+        if (enemy == player) {
+          playerLives--;
+          this.destroy();
         } else {
-          if (enemy == player) {
-            playerLives--;
-            this.destroy();
-          } else {
-            enemy.destroy();
-          }
+          this.destroy();
+          enemy.destroy();
         }
       }
     }

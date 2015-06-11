@@ -14,7 +14,8 @@ class HostileSprite extends AbstractSprite {
       PShape graphic = factory.getBasicBullet();
       PVector position = new PVector(this.position.x, this.position.y);
       int radius = factory.getBasicBulletRadius();
-      ProjectileSprite projectile = new ProjectileSprite(this, radius, graphic, position, projectileVelocity);
+      ProjectileSprite projectile = 
+          new ProjectileSprite(this, radius, graphic, position, projectileVelocity);
       sprites.add(projectile);
       shotTime = millis();
     }
@@ -55,4 +56,32 @@ class HostileSprite extends AbstractSprite {
       return false;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
