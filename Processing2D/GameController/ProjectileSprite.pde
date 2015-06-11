@@ -12,6 +12,9 @@ class ProjectileSprite extends AbstractSprite {
   void update() {
     position.add(velocity);
     checkCollisions();
+    if(this.position.y < -this.radius) {
+      sprites.remove(this);
+    }
   }
   
   void checkCollisions() {
@@ -24,3 +27,4 @@ class ProjectileSprite extends AbstractSprite {
     }
   }
 }
+

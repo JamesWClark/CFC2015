@@ -3,3 +3,4 @@ interface Level {
   void levelDraw();
   boolean levelIsComplete();
 }
+

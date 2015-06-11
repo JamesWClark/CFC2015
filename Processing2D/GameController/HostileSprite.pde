@@ -20,15 +20,30 @@ class HostileSprite extends AbstractSprite {
     }
   }
   
-  void fire(HostileSprite target) {
-    if (readyToFire()) {
-      PShape graphic = factory.getBasicBullet();
-      PVector position = new PVector(this.position.x, this.position.y);
-      PVector velocity = new PVector(0, 5);
-      int radius = factory.getBasicBulletRadius();
-      ProjectileSprite projectile = new ProjectileSprite(this, radius, graphic, position, velocity);
-      sprites.add(projectile);
-      shotTime = millis();
+  void fire(HostileSprite target, int speed) {
+    speed = 10 * speed;
+    if(readyToFire()) {
+      double distance;
+      float x1 = this.position.x;
+      float y1 = this.position.y;
+      float x2 = target.position.x;
+      float y2 = target.position.y;
+      float x3 = x1; //the right angle
+      float y3 = y2; //the right angle
+      if(x1 == x2) {
+        distance = Math.abs(x2 - x1);
+        fire(new PVector(0, speed));
+      } else if (y1 == y2) {
+        distance = Math.abs(y2 - y1);
+        fire(new PVector(speed, 0));
+      } else {
+        distance = Math.sqrt((x2 - x1) + (y2 - y1));
+        float side1 = x2 - x1;
+        float side2 = y2 - y1;
+        float dx = side1 / Math.abs(speed);
+        float dy = side2 / Math.abs(speed);
+        fire(new PVector(dx, dy));
+      }
     }
   }
 

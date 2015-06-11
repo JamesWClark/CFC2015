@@ -4,6 +4,7 @@
  */
 final int playersTeam = 1;
 final int enemiesTeam = 2;
+int playerLives = 3;
 int playerSpeedLimit = 8;
 int enemySpeedLimit = 4;
 int stage = 0;

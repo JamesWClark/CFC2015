@@ -8,7 +8,7 @@ class LevelOne implements Level {
   void levelSetup() {
     lockedControls = true;
     player.position = new PVector(0.5 * width, height + 6 * player.radius);
-    player.velocity = new PVector(0, -2);
+    player.velocity = new PVector(0, -3);
   }
 
   void levelDraw() {
@@ -76,7 +76,7 @@ class LevelOne implements Level {
     int i = (int)random(0, enemies.size());
     HostileSprite enemy = (HostileSprite)enemies.get(i);
     if (now > timeSinceLastEnemyShot + enemyShotDelay && enemy != player) {
-      enemy.fire(player);
+      enemy.fire(player, 8);
       timeSinceLastEnemyShot = now;
     }
   }
