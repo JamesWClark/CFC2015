@@ -4,15 +4,18 @@ class LevelOne extends AbstractLevel {
   long timeSinceLastEnemyShot = 0;
   long enemyShotDelay = 400; //ms
   
+  //default constructor
   LevelOne() {
   }
 
+  //initialize level 1 - called during main setup()
   void levelSetup() {
     lockedControls = true;
     player.position = new PVector(0.5 * width, height + 6 * player.radius);
     player.velocity = new PVector(0, -3);
   }
 
+  //called during main draw()
   void levelDraw() {
     if (intro)
       playIntro();
@@ -20,6 +23,7 @@ class LevelOne extends AbstractLevel {
       fight();
   }
 
+  //fly in the player
   void playIntro() {
     if (player.position.y <= playerControllerLine) {
       player.velocity = new PVector(0, 0);
@@ -30,6 +34,7 @@ class LevelOne extends AbstractLevel {
     }
   }
 
+  //continue battling until level complete
   void fight() {
     automateEnemies();
     if (levelIsComplete()) {
@@ -37,6 +42,7 @@ class LevelOne extends AbstractLevel {
     }
   }
 
+  //create level enemies
   void spawnEnemies() {
     int radius = factory.getBasicEnemyRadius();
     int enemyRows = 4;
@@ -53,9 +59,7 @@ class LevelOne extends AbstractLevel {
     }
   }
 
-  /**
-   * AUTOMATE THE ENEMIES
-   */
+  //make enemies shoot
   void automateEnemies() {
     long now = millis();
     int i = (int)random(0, enemies.size());
@@ -66,6 +70,7 @@ class LevelOne extends AbstractLevel {
     }
   }
 
+  //check if level is complete
   boolean levelIsComplete() {
     if (enemies.size() > 1 && enemies.contains(player)) {
       return false;

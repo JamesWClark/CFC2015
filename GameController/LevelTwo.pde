@@ -1,5 +1,7 @@
 class LevelTwo extends AbstractLevel {
 
+  //see notes from level 1
+
   boolean intro = true;
   long timeSinceLastEnemyShot = 0;
   long enemyShotDelay = 300; //ms

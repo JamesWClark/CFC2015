@@ -3,6 +3,7 @@ abstract class AbstractLevel implements Level {
   abstract void levelSetup();
   abstract void levelDraw();
 
+  //advance the games by level
   void advance() {
     lockedControls = true;
     //remove all projectiles

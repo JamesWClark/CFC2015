@@ -62,28 +62,6 @@ void draw() {
   }
 }
 
-void showPlayerLives() {
-  for (int i = 0; i < playerLives; i++) {
-    shape(lifeIcon, 60 + i * 100, height - 40);
-  }
-}
-
-void endGame(String condition) {
-  if(condition.equals("lose")) {
-    cursor();
-    textAlign(CENTER);
-    textSize(48);
-    text("Game Over", width/2, height/2);
-    noLoop();
-  } else if(condition.equals("win")) {
-    cursor();
-    textAlign(CENTER);
-    textSize(48);
-    text("You Beat the Game", width/2, height/2);
-    noLoop();    
-  }
-}
-
 /**
  * FULL SCREEN MODE
  */
@@ -154,6 +132,7 @@ void keyReleased() {
     keys[2] = false;
 }
 
+//object is bound by left edge of screen
 boolean isLeftBound(AbstractSprite sprite) {
   int leftBoundary = 2 * sprite.radius;
   if (sprite.position.x <= leftBoundary)
@@ -162,6 +141,7 @@ boolean isLeftBound(AbstractSprite sprite) {
     return false;
 }
 
+//object is bound by right edge of screen
 boolean isRightBound(AbstractSprite sprite) {
   int rightBoundary = width - 2 * sprite.radius;
   if (sprite.position.x >= rightBoundary)
@@ -170,7 +150,29 @@ boolean isRightBound(AbstractSprite sprite) {
     return false;
 }
 
+//shows player lives in bottom left corner
+void showPlayerLives() {
+  for (int i = 0; i < playerLives; i++) {
+    shape(lifeIcon, 60 + i * 100, height - 40);
+  }
+}
 
+//ends the game!
+void endGame(String condition) {
+  if(condition.equals("lose")) {
+    cursor();
+    textAlign(CENTER);
+    textSize(48);
+    text("Game Over", width/2, height/2);
+    noLoop();
+  } else if(condition.equals("win")) {
+    cursor();
+    textAlign(CENTER);
+    textSize(48);
+    text("You Beat the Game", width/2, height/2);
+    noLoop();    
+  }
+}
 
 
 

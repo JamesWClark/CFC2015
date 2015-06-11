@@ -2,12 +2,14 @@ class ProjectileSprite extends AbstractSprite {
 
   HostileSprite shooter;
 
+  //constructor
   ProjectileSprite(HostileSprite shooter, int radius, PShape graphic, PVector position, PVector velocity) {
     super(position, velocity);
     this.shooter = shooter;
     this.create(graphic, radius);
   }
 
+  //override the AbstractSprite.update - to check for collisions
   @Override
     void update() {
     position.add(velocity);
@@ -17,6 +19,7 @@ class ProjectileSprite extends AbstractSprite {
     }
   }
 
+  //check collision against every sprite in display
   void checkCollisions() {
     for (int i = 0; i < enemies.size (); i++) {
       HostileSprite enemy = (HostileSprite)enemies.get(i);
