@@ -1,10 +1,9 @@
 # Site settings
 title: Camp for Coders 2015
 description: 4 weeks of code at Rockhurst High School, Summer 2015
-baseurl: "/CFC2015"
-url: "https://jameswclark.github.io"
+baseurl: ""
+url: ""
 
 # Build settings
 highlighter: true
 markdown: kramdown
-permalink: pretty
