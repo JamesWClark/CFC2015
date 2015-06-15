@@ -1,19 +1,14 @@
-PImage img1;
-PImage img2;
-PImage img3;
-PImage img4;
+PImage img;
+PFont font;
 void setup() {
-  img1 = loadImage("ignatius.jpg");
-  img2 = loadImage("ignatius.jpg");
-  img3 = loadImage("ignatius.jpg");
-  img4 = loadImage("ignatius.jpg");
-  size(img1.width, img1.height);
-  image(img1, 0, 0, width/2,height/2);
+  background(0);
+  img = loadImage("zombie.png");
+  size(img.width, img.height);
   tint(255,0,0);
-  image(img2, width/2, 0, width/2, height/2);
-  tint(0,255,0);
-  image(img3, 0, height/2, width/2, height/2);
-  tint(0,0,255);
-  image(img4, width/2,height/2,width/2,height/2);
+  image(img, 0, 0);
+  font = loadFont("Chiller-Regular-48.vlw");
+  textFont(font, 100);
+  textAlign(CENTER);
+  text("Game Over", width/2, height-100);
 }
 
