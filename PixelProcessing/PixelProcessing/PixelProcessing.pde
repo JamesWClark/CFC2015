@@ -1,14 +1,21 @@
 PImage img;
-PFont font;
+int scalex;
+int scaley;
 void setup() {
-  background(0);
-  img = loadImage("zombie.png");
-  size(img.width, img.height);
-  tint(255,0,0);
-  image(img, 0, 0);
-  font = loadFont("Chiller-Regular-48.vlw");
-  textFont(font, 100);
+  img = loadImage("ignatius.jpg");
+  scalex = img.width * 2;
+  scaley = img.height * 2;
+  size(scalex,scaley);
+  image(img,0,0,scalex, scaley);
+  textSize(40);
   textAlign(CENTER);
-  text("Game Over", width/2, height-100);
+  fill(255,3,3);
+  text("some text here", width/2, height-100);
 }
-
+void draw() {
+}
+void keyPressed() {
+  if(key == 'p') {
+    saveFrame("data/" + System.currentTimeMillis() + ".jpg");
+  }
+}
