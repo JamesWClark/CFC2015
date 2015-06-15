@@ -1,31 +1,50 @@
 ---
 layout: page
 ---
+<div class="jumbotron">
+  <div class="container">
+    <h1>Create a Repository on Github</h1>
+    <p>The free and public version control system on Github hosts millions of static file collections.</p>
+  </div>
+</div>
 <div class="container">
-  <p>Create a <a href="https://github.com/" target="_blank">Github</a> account.</p>
-  <p>Login. Create a new repository. Call it Camp.</p>
-  <img src="../img/new-repository.png" />
-  <p>Initialize your repository with a README, and select Processing from the list.</p>
+  <h2>Create a Github Account</h2>
+  <p>Visit <a href="https://github.com/" target="_blank">https://github.com/</a> and create a free account.</p>
+  <h2>Create a New Repository on Github</h2>
+  <p>Login. Click the <img src="../img/new-repository.png" /> button. Call it <em>Camp</em> or whatever you like.</p>
+  <p>Check the <strong>Initialize this repository with a README</strong> check box, and select <strong>Processing</strong> from the list.</p>
   <img src="../img/repo-creation.png" />
-  <p>Copy your repository's URL.</p>
+  <h2>Copy the URL</h2>
   <img src="../img/github-url.png" />
-  <p>Open Git Bash from the Start Menu.</p>
-  <p>Create a new directory on the H: drive. Call it git.</p>
-  <p>
-    <code>cd /h/
-      <br />
-      mkdir git
-      <br />
-      cd git</code>
-  </p>
-  <p>Clone your project.</p>
-  <p>
-    <code>git clone &lt;your url goes here&gt; &lt;your name goes here&gt;</code>
-    <br />
-    example: <code>git clone https://github.com/Clark/Camp.git MyCampProject</code>
-  </p>
-  <p>Go into your project in Git Bash.</p>
-  <p><code>cd &lt;your name from above goes here&gt;</code></p>
-  <p>Your shell should look like this.</p>
+  <h2>Open Git Bash</h2>
+  <p>Open <strong>Git Bash</strong> from <strong>Start Menu > All Programs > Git > Git Bash</strong></p>
   <img src="../img/git-bash.png" />
+  <h2>Create Local Folders</h2>
+  <p>Enter these commands in order. Press enter after each line.</p>
+  <table class="table-code-listing">
+    <tr>
+      <td><code>cd /h/</code></td>
+      <td><code>cd</code> means "change directory" and in this case you're navigating to your H: drive in Windows. Alternatively you could consider doing <code>cd /c/</code> to navigate to your C: drive.</td>
+    </tr>
+    <tr>
+      <td><code>mkdir MyNameOrSomething</code></td>
+      <td><code>mkdir</code> means "make directory" or in more familiar terms "make folder" and the second part, MyNameOrSomething is simply a name you get to give it. What you enter for the name does not matter.</td>
+    </tr>
+    <tr>
+      <td><code>cd MyNameOrSomething</code></td>
+      <td>Again, using the "change directory" command, we are simply navigating somewhere. In this case, we are navigating or "changing directory" to the folder we just made, MyNameOrSomething.</td>
+    </tr>
+  </table>
+  <h2>Clone Your Repository</h2>
+  <p>Recall we previously copied our remote repository's URL above. The command format is as follows:</p>
+  <p><code>git clone &lt;github-url&gt; &lt;any-name-you-choose&gt;</code></p>
+  <p>example:<br /><code>git clone https://github.com/Clark/Camp.git MyCampProject</code></p>
+  <p>Pasting in Git Bash isn't obvious. To do it, follow these steps:</p>
+  <img src="../img/git-edit-paste.png" />
+  <h2>Change Directory, Again</h2>
+  <p><code>cd &lt;your-cloned-folder-name-from-above&gt;</code></p>
+  <p>All these commands in one shell looks like this:</p>
+  <img src="../img/git-bash.png" />
+  <h2>So, What Just Happened?</h2>
+  <p>We created a couple folders, and copied our project on Github into one of them. We can navigate to it using Windows Explorer which has this icon: <img src="../img/windows-explorer-icon.png" /></p>
 </div>
