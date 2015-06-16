@@ -5,5 +5,5 @@ baseurl: ""
 url: ""
 
 # Build settings
-highlighter: pygments
+highlighter: true
 markdown: kramdown
