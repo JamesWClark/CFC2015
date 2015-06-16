@@ -1,21 +1,16 @@
 PImage img;
-int scalex;
-int scaley;
 void setup() {
-  img = loadImage("ignatius.jpg");
-  scalex = img.width * 2;
-  scaley = img.height * 2;
-  size(scalex,scaley);
-  image(img,0,0,scalex, scaley);
-  textSize(40);
-  textAlign(CENTER);
-  fill(255,3,3);
-  text("some text here", width/2, height-100);
+  img = loadImage("leaves.jpg");
+  size(img.width,img.height);
 }
 void draw() {
+  image(img,0,0);
+  //filter(INVERT);
+  filter(POSTERIZE, 8);
 }
 void keyPressed() {
-  if(key == 'p') {
+  if(key == 'p' || key == 'P') {
     saveFrame("data/" + System.currentTimeMillis() + ".jpg");
   }
 }
+

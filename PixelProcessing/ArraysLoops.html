@@ -1,0 +1,97 @@
+---
+layout: page
+---
+<div class="jumbotron">
+  <div class="container">
+    <h1>Arrays & Loops</h1>
+  </div>
+</div>
+<div class="container">
+  <h2>Arrays</h2>
+  <p>Evenly spaced addresses in memory. Can store primitives or object references.</p>
+  <h3>Array: Integer</h3>
+  <code><pre>int[] integers = new int[5];
+integers[0] = 5;
+integers[1] = 3;
+integers[2] = 10;
+integers[3] = 22;
+integers[4] = 1;
+integers[5] = 5;</pre></code>
+  <h3>Array: Float</h3>
+  <code><pre>float[] decimals = new float[3];
+decimals[0] = 0.2;
+decimals[1] = 3.14;
+decimals[2] = -55.1241;</pre></code>
+  <h3>Array: String</h3>
+  <code><pre>String[] words1 = {"cat", "dog", "mouse"};
+//these are the same
+String[] words2 = new String[3];
+words2[0] = "cat";
+words2[1] = "dog";
+words2[2] = "mouse";</pre></code>
+  <h3>Array: Char</h3>
+  <code><pre>String hello1 = "hello";
+char[] hello2 = {'h','e','l','l','o'};
+char[] hello3 = hello2.toCharArray();
+char[] hello4 = new char[2];
+hello4[0] = 'h';
+hello4[1] = 'i';</pre></code>
+  <h3>Spot the Problem #1</h3>
+  <code><pre>int[] integers = new int[5];
+integers[0] = 5;
+integers[1] = 3;
+integers[2] = 10;
+integers[3] = 22;
+integers[4] = 1;
+integers[5] = 5;
+println(integers.length);
+println(integers[5]);</pre></code>
+  <h3>Spot the Problem #2</h3>
+  <code><pre>float[] decimals = new float[3];
+decimals[1] = 3.14;
+decimals[2] = -55.1241;
+println(decimals[0]);</pre></code>
+  <h3>Spot the Problem #3</h3>
+  <code><pre>int[] nums = new int[3];
+nums[1] = 3;
+nums[2] = 4;
+println(nums[0]);</pre></code>
+  <h3>Spot the Problem #4</h3>
+  <code><pre>int a;
+println(a);</pre></code>
+  <h3>Spot the Problem #5</h3>
+  <code><pre>String[] words = {"cat", "dog", "mouse"};
+println(words[1]);</pre></code>
+  <h3>Spot the Problem #6</h3>
+  <code><pre>int[] n = {1,3,5,2,4};</pre></code>
+  <h3>Spot the Problem #7</h3>
+  <code><pre>String hello1 = "hello";
+char[] hello2 = {'h','e','l','l','o'};
+char[] hello3 = hello2.toCharArray();
+char[] hello4 = new char[5];
+hello4[0] = 'h';
+hello4[1] = 'e';
+hello4[2] = 'l';
+hello4[3] = 'l';
+hello4[4] = 'o';
+
+if(hello2 == hello4) {
+  println('yes');
+}
+else {
+  println('no');
+}</pre></code>
+  <h2>Loops</h2>
+  <h3>for #1</h3>
+  <code><pre>int[] nums = {1,3,-6,1,5,-2,-5,4,-1,0};
+
+for(int i = 0; i < nums.length; i++) {
+  print(nums[i]);
+}</pre></code>
+  <h3>for #2 (foreach)</h3>
+  <code><pre>int[] nums = {1,3,-6,1,5,-2,-5,4,-1,0};
+
+for(int i : nums) {
+  print(i);
+}</pre></code>
+</div>
