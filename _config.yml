@@ -5,5 +5,5 @@ baseurl: "/CFC2015"
 url: "https://jameswclark.github.io"
 
 # Build settings
-highlighter: true
+highlighter: pygments
 markdown: kramdown
