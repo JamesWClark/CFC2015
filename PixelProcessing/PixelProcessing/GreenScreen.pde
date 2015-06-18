@@ -1,4 +1,15 @@
 class GreenScreen {
+  
+  PImage foreground; //this one's the green screen
+  PImage background; //this is the background we replace green with
+  ImageTool tool = new ImageTool();
+  
+  GreenScreen(PImage foreground, PImage background) {
+    this.foreground = foreground;
+    this.background = background;
+    removeGreen(foreground);
+  }
+  
   void removeGreen(PImage input) {
     background(255);
     for (int i = 0; i < input.pixels.length; i++) {
