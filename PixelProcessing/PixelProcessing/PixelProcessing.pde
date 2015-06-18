@@ -25,9 +25,9 @@ void setup() {
     ImageTool.matchWidth(smallest, largest);
   }
   
-  size(largest.width, largest.height);
+  size(largest.width, smallest.height);
   image(largest, 0, 0);
-  image(smallest, 0, 0);
+  //image(smallest, 0, 0);
 }
 void draw() { } //required for keyPressed event to fire
 void keyPressed() {

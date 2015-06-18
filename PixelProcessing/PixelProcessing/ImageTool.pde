@@ -1,6 +1,5 @@
 static class ImageTool {
-
-
+  
   static void matchWidth(PImage first, PImage second) {
     int w;
     if (first.width > second.width) {
@@ -21,14 +20,6 @@ static class ImageTool {
       h = first.height;
       second.resize(0, h);
     }
-  }
-  
-  static void cropWidth(PImage first, PImage second) {
-    
-  }
-  
-  static void cropHeight(PImage first, PImage second) {
-    
   }
 }
 

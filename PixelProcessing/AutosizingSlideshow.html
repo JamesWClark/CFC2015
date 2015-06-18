@@ -16,7 +16,7 @@ void keyPressed() {
     saveFrame("data/" + System.currentTimeMillis() + ".jpg");
   }
 }</pre></code>
-  <h2>Resizing Images</h2>
+  <h2><a href="https://processing.org/reference/PImage_resize_.html" target="_blank">PImage.resize()</a></h2>
   <p>First, let's consider the problem of trying to match image sizes. Consider these different images:</p>
   <div class="row">
     <div class="col-md-6">
@@ -34,9 +34,8 @@ void keyPressed() {
   <img src="PixelProcessing/data/combo3.jpg" />
   <img src="PixelProcessing/data/combo4.jpg" />
   <img src="PixelProcessing/data/combo5.jpg" />
-  <p>...But that's just partial matching, and it's not fully automated. For example, to match one over the other requires the author to known in advance the image dimensions so they can make a decision about matching height or width.</p>
-    <h2>ImageTool Class</h2>
-  <p>A utility class for managing image sizes.</p>
+  <h2>ImageTool Class</h2>
+  <p>A utility class for managing image sizes. This would benefit from more automation, but it's a start.</p>
   <code><pre>static class ImageTool {
 
   static void matchWidth(PImage first, PImage second) {
@@ -73,13 +72,49 @@ void setup() {
   image(parent, 0, 0);
   image(child, 0, 0);
 }</pre></code>
+  <h3>Another ImageTool Driver</h3>
+  <code><pre>PImage img1;
+PImage img2;
+PImage largest;
+PImage smallest;
+
+void setup() {
+  img1 = loadImage("flowers.jpg");
+  img2 = loadImage("desert.jpg");
+  
+  int img1Area = img1.width * img1.height;
+  int img2Area = img2.width * img2.height;
+  
+  if(img1Area > img2Area) {
+    largest = img1;
+    smallest = img2;
+  } else {
+    largest = img2;
+    smallest = img1;
+  }
+
+  //scale to largest (regardless of width & height)
+  if(largest.width > smallest.width) {
+    ImageTool.matchWidth(largest, smallest);
+  } else {
+    ImageTool.matchWidth(smallest, largest);
+  }
+  
+  size(largest.width, largest.height);
+  image(largest, 0, 0);
+  image(smallest, 0, 0);
+}
+void draw() { } //required for keyPressed event to fire
+void keyPressed() {
+  if(key == 'p' || key == 'P') {
+    saveFrame("data/" + System.currentTimeMillis() + ".jpg");
+  }
+}</pre></code>
   <h2>The Larger of Two Images</h2>
   <p>width * height = area</p>
 
   <h2>Cropping</h2>
-  <h2><a href="https://processing.org/reference/PImage_resize_.html" target="_blank">PImage.resize()</a></h2>
-  <h2>Tiles</h2>
-  <p>Tile everything - no matter the size</p>
+  <p>After matching one size, draw only the pixels to match the other dimension. If you matched width, draw pixels only to a height of the opposite image. Clearly this topic needs more development.</p>
   <h2><a href="https://docs.oracle.com/javase/7/docs/api/java/io/File.html" target="_blank">Java API: File</a></h2>
   <h2>SlideShow Class</h2>
   <code><pre>class SlideShow {
