@@ -1,20 +1,5 @@
 static class ImageTool {
 
-  //class variables
-
-/*
-  ArrayList<PImage> images = new ArrayList<PImage>();
-
-  //constructor
-  ImageTool(PImage... imgs) {
-    for (PImage p : imgs) {
-      images.add(p);
-    }
-    for (PImage p : images) {
-      image(p, 0, 0);
-    }
-  }
-*/
 
   static void matchWidth(PImage first, PImage second) {
     int w;
@@ -36,6 +21,14 @@ static class ImageTool {
       h = first.height;
       second.resize(0, h);
     }
+  }
+  
+  static void cropWidth(PImage first, PImage second) {
+    
+  }
+  
+  static void cropHeight(PImage first, PImage second) {
+    
   }
 }
 

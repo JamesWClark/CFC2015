@@ -3,29 +3,148 @@ layout: page
 ---
 <div class="jumbotron">
   <div class="container">
-    <h1>Autosizing Slideshow</h1>
+    <h1>Autosizing & Slideshow</h1>
     <p>Automatically resize images to match dimension and show them in a slideshow.</p>
   </div>
 </div>
 <div class="container">
+  <h2>Review: Screen Capture</h2>
+  <p>A quick review - this is the code we previously used for screen captures. You can include it in any of your projects.</p>
+  <code><pre>void draw() { } //required for keyPressed event to fire
+void keyPressed() {
+  if(key == 'p' || key == 'P') {
+    saveFrame("data/" + System.currentTimeMillis() + ".jpg");
+  }
+}</pre></code>
   <h2>Resizing Images</h2>
   <p>First, let's consider the problem of trying to match image sizes. Consider these different images:</p>
   <div class="row">
-    <div class="col-md-6">
-      <img src="PixelProcessing/data/desert.jpg" />
-    </div>
     <div class="col-md-6">
       <img src="PixelProcessing/data/flowers.jpg" />
       <br />
       <img src="PixelProcessing/data/jungle.jpg" />
     </div>
+    <div class="col-md-6">
+      <img src="PixelProcessing/data/desert.jpg" />
+    </div>
   </div>
+  <p>If working in a project that combines images (such as blending or green screen), it may be desirable to match their dimensions.</p>
+  <img src="PixelProcessing/data/combo1.jpg" />
+  <img src="PixelProcessing/data/combo2.jpg" />
+  <img src="PixelProcessing/data/combo3.jpg" />
+  <img src="PixelProcessing/data/combo4.jpg" />
+  <img src="PixelProcessing/data/combo5.jpg" />
+  <p>...But that's just partial matching, and it's not fully automated. For example, to match one over the other requires the author to known in advance the image dimensions so they can make a decision about matching height or width.</p>
+    <h2>ImageTool Class</h2>
+  <p>A utility class for managing image sizes.</p>
+  <code><pre>static class ImageTool {
+
+  static void matchWidth(PImage first, PImage second) {
+    int w;
+    if (first.width > second.width) {
+      w = second.width;
+      first.resize(w, 0);
+    } else {
+      w = first.width;
+      second.resize(w, 0);
+    }
+  }
+
+  static void matchHeight(PImage first, PImage second) {
+    int h;
+    if (first.height > second.height) {
+      h = second.height;
+      first.resize(0, h);
+    } else {
+      h = first.height;
+      second.resize(0, h);
+    }
+  }
+}</pre></code>
+  <h3>ImageTool Driver</h3>
+  <code><pre>PImage parent;
+PImage child;
+
+void setup() {
+  parent = loadImage("flowers.jpg");
+  child = loadImage("desert.jpg");
+  ImageTool.matchHeight(parent, child);
+  size(parent.width, parent.height);
+  image(parent, 0, 0);
+  image(child, 0, 0);
+}</pre></code>
+  <h2>The Larger of Two Images</h2>
+  <p>width * height = area</p>
+
+  <h2>Cropping</h2>
   <h2><a href="https://processing.org/reference/PImage_resize_.html" target="_blank">PImage.resize()</a></h2>
   <h2>Tiles</h2>
   <p>Tile everything - no matter the size</p>
   <h2><a href="https://docs.oracle.com/javase/7/docs/api/java/io/File.html" target="_blank">Java API: File</a></h2>
   <h2>SlideShow Class</h2>
-  <p>A driver method for the SlideShow class.</p>
+  <code><pre>class SlideShow {
+
+  //class variables
+  int currentSlide = 0;
+  int slideCounter = 0;
+  float delay = 2.0; //seconds
+  ArrayList<PImage> images = new ArrayList<PImage>();
+  String[] validExtensions = {"png", "jpg", "jpeg", "gif"};
+  File[] files;
+  File dataFolder;
+
+  //default constructor
+  SlideShow() {
+    dataFolder = new File(dataPath(""));
+    loadImages();
+  }
+  
+  //overloaded constructor
+  SlideShow(String folderName) {
+    dataFolder = new File(dataPath(folderName));
+    loadImages();
+  }
+
+  //logic to advance and display the slideshow
+  void advance() {
+    imageMode(CENTER);
+    if(slideCounter + millis() > 1000 * delay * slideCounter) {
+      currentSlide++;
+      slideCounter++;
+      if(currentSlide == images.size()) {
+        currentSlide = 0;
+      }
+    }
+    background(0);
+    image(images.get(currentSlide), width/2, height/2);
+  }
+  
+  //logic to load images from "data" folder
+  void loadImages() {
+    //load images
+    files = dataFolder.listFiles();
+    for(File file : files) {
+      if(isImage(file)) {
+        images.add(loadImage(file.getName()));
+      }
+    }
+  }
+    
+  // checks if image is PNG, JPEG, JPG, GIF
+  boolean isImage(File file) {
+    //i will always be negative 1 when there is no period found
+    int i = file.getName().lastIndexOf('.');
+    if(i > -1) {
+      for(String extension : validExtensions) {
+        if(file.getName().substring(i + 1).toLowerCase().equals(extension)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+}</pre></code>
+  <h3>A driver method for the SlideShow class.</h3>
   <code><pre>SlideShow ss;
 
 void setup() {
