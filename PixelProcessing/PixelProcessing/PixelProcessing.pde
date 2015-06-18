@@ -1,25 +1,11 @@
-PImage img;
+PImage foreground;
+PImage background;
 
 void setup() {
-  
-  img = loadImage("city.jpg");
-  size(img.width, img.height);
+  foreground = loadImage("spaceship.png");
+  background = loadImage("space.png");
+  ImageTool.matchWidth(foreground, background);
+  GreenScreen gs = new GreenScreen(foreground, background);
+  gs.display();
 }
 
-void draw() {
-  loadPixels(); 
-
-  img.loadPixels(); 
-  for (int y = 0; y < height; y++) {
-    for (int x = 0; x < width; x++) {
-      int loc = x + y*width;
-      
-      float r = red(img.pixels[loc]);
-      float g = green(img.pixels[loc]);
-      float b = blue(img.pixels[loc]);
-
-      pixels[loc] =  color(r,g,b);          
-    }
-  }
-  updatePixels();
-}

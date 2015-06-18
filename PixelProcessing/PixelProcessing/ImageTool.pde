@@ -1,7 +1,8 @@
-class ImageTool {
+static class ImageTool {
 
   //class variables
 
+/*
   ArrayList<PImage> images = new ArrayList<PImage>();
 
   //constructor
@@ -13,8 +14,9 @@ class ImageTool {
       image(p, 0, 0);
     }
   }
+*/
 
-  void matchWidth(PImage first, PImage second) {
+  static void matchWidth(PImage first, PImage second) {
     int w;
     if (first.width > second.width) {
       w = second.width;
@@ -25,7 +27,7 @@ class ImageTool {
     }
   }
 
-  void matchHeight(PImage first, PImage second) {
+  static void matchHeight(PImage first, PImage second) {
     int h;
     if (first.height > second.height) {
       h = second.height;
