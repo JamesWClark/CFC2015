@@ -1,0 +1,57 @@
+﻿body {
+	font-size: 25px;
+	font-family: sans-serif;
+	background: url("../img/background.jpg") no-repeat center center fixed;
+	background-size: cover;
+	margin: 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+p {
+	-webkit-margin-before: 0px;
+}
+
+h1.title {
+	text-align: center;
+}
+
+.container {
+	background-color: white;
+	max-width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1%;
+	padding-right: 1%;
+}
+
+.row {
+}
+
+.col-md-4 {
+	display: inline-block;
+	width: 29.3%;
+	padding: 2%;
+	vertical-align: top;
+}
+
+.col-md-6 {
+	display: inline-block;
+	width: 46%;
+	padding: 2%;
+	vertical-align: top;
+}
+
+@media screen and (max-width: 768px) {
+	.col-md-4 {
+		display: block;
+		width: 100%;
+	}
+
+	.col-md-6 {
+		display: block;
+		width: 100%;
+	}
+}

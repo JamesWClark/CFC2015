@@ -119,6 +119,12 @@ p {
     padding: 7px 0 7px 0;
 }
 
+pre {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+
 strong {
     color: #5858FA;
 }
@@ -152,6 +158,10 @@ strong {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.red {
+	color: red;
 }
 
 .site-footer, .footer-push {
