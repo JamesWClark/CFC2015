@@ -1,0 +1,98 @@
+---
+layout: page
+---
+<div class="jumbotron">
+  <div class="container">
+    <h1>Getting Started</h1>
+    <p>In this first section, we take a look at building basic web pages using simple text editing software - the kind of software that comes standard with most personal computers.</p>
+  </div>
+</div>
+
+<div class="container">
+	<h2>Viewport</h2>
+	<code><pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</pre></code>
+	<h2>Navigation</h2>
+	<code><pre class="no-select">&lt;div class="menu-bar"&gt;
+		&lt;nav&gt;
+			&lt;ul&gt;
+				&lt;li&gt;&lt;a href="../site2/visitkc.html"&gt;Visit KC&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href="../site1/visitkc.html"&gt;Visit KC - Not Responsive&lt;/a&gt;&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/nav&gt;
+	&lt;/div&gt;</pre></code>
+
+	<h2>CSS</h2>
+	<code><pre class="no-select">.main {
+		background-color: white;
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 2%;
+	}
+	.menu-bar {
+		background-color: black;
+		color: white;
+		padding: 7px;
+	}
+	.menu-bar nav {
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.menu-bar nav a {
+		color: white;
+		text-decoration: none;
+	}
+	.menu-bar nav a:hover {
+		text-decoration: underline;
+	}
+	.menu-bar nav ul {
+		list-style-type: none;
+	}
+	.menu-bar nav ul li {
+		display: inline;
+		padding-left: 5%;
+		padding-right: 5%;
+	}</pre></code>
+	<h2>Unrelated: Javascript</h2>
+	<code><pre class="no-select">window.onload = changeSlide;
+
+	function displayTime() {
+		var element = document.getElementById('clock');
+		var now = new Date();
+		var options = {
+			hour: '2-digit',
+			minute: '2-digit',
+			second: '2-digit'
+		}
+		element.innerHTML = 
+			now.toLocaleString(navigator.language, options);
+		setTimeout(displayTime, 1000);
+	}
+
+	//an array of references to images
+	var images = [
+		'img/skyrim1.jpg',
+		'img/skyrim2.jpg',
+		'img/skyrim3.jpg'
+	];
+
+	var delay = 3000; //milliseconds
+	var img = document.getElementById('slides');
+	var count = 0;
+	function changeSlide(number) {
+		img.src = images[count];
+		if(count < images.length - 1) {
+			count++;
+		} else {
+			count = 0;
+		}
+		setTimeout(changeSlide, delay);
+	}
+
+	function showImage(path) {
+		console.log(path);
+		img.src = path;
+		return false;
+	}</pre></code>
+</div>

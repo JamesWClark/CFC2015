@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 window.onload = changeSlide;
 
 function displayTime() {
@@ -20,22 +12,6 @@ function displayTime() {
 		now.toLocaleString(navigator.language, options);
 	setTimeout(displayTime, 1000);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //an array of references to images
 var images = [
@@ -56,7 +32,6 @@ function changeSlide(number) {
 	}
 	setTimeout(changeSlide, delay);
 }
-
 
 function showImage(path) {
 	console.log(path);
