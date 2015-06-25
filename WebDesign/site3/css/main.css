@@ -49,3 +49,19 @@ img {
 #centerdiv {
 	text-align: center;
 }
+
+
+
+.main {
+	vertical-align: top;
+}
+#left-side {
+	width: 20%
+	float: left;
+	background-color: red;
+}
+#right-side {
+	width: 80%;
+	float: left;
+	background-color: white;
+}
