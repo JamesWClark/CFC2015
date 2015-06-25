@@ -1,0 +1,51 @@
+body {
+	background: url("../img/background.jpg") 
+		no-repeat center center fixed;
+	background-size: cover;
+	margin: 0;
+	font-size: 20px;
+}
+p { font-size: 2em;}
+.main {
+	background-color: white;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 2%;
+}
+.menu-bar {
+	background-color: black;
+	color: white;
+	padding: 7px;
+}
+.menu-bar nav {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.menu-bar nav a {
+	color: white;
+	text-decoration: none;
+}
+.menu-bar nav a:hover {
+	text-decoration: underline;
+}
+.menu-bar nav ul {
+	list-style-type: none;
+}
+.menu-bar nav ul li {
+	display: inline;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+
+img {
+}
+.wide {
+	width: 100%;
+}
+
+#centerdiv {
+	text-align: center;
+}
