@@ -1,4 +1,3 @@
-
 /**
  * GLOBAL VARIABLES
  */
@@ -23,6 +22,7 @@ PShape lifeIcon;
 
 /**
  * SETUP - INITIALIZE, RUNS ONCE
+ * this method is built into processing. it is always called one time
  */
 void setup() {
   size(displayWidth, displayHeight, P2D);
@@ -45,6 +45,7 @@ void setup() {
 
 /**
  * DRAW - THE MAIN DRAWING LOOP REPEATS EVERY FRAME
+ * this method is build into processing. it is called repeatedly as a loop
  */
 void draw() {
   background(25);
@@ -59,6 +60,34 @@ void draw() {
   //update all sprite positions on screen
   for (int i = 0; i < sprites.size (); i++) {
     sprites.get(i).updateAndDisplay();
+  }
+}
+
+/**
+ * DISPLAY LIVES AS A PLAYER SHAPE, BOTTOM LEFT
+ */
+void showPlayerLives() {
+  for (int i = 0; i < playerLives; i++) {
+    shape(lifeIcon, 60 + i * 100, height - 40);
+  }
+}
+
+/**
+ * CHECKS THE STATE OF THE GAME (WIN OR LOSE), DISPLAY A MESSAGE, STOP THE GAME LOOP
+ */
+void endGame(String condition) {
+  if(condition.equals("lose")) {
+    cursor();
+    textAlign(CENTER);
+    textSize(48);
+    text("Game Over", width/2, height/2);
+    noLoop();
+  } else if(condition.equals("win")) {
+    cursor();
+    textAlign(CENTER);
+    textSize(48);
+    text("You Beat the Game", width/2, height/2);
+    noLoop();    
   }
 }
 
@@ -85,10 +114,11 @@ HostileSprite spawnPlayer() {
  */
 void controlPlayer() {
   if (keys[0]) { //LEFT
-    if (isLeftBound(player))
+    if (isLeftBound(player)) {
       player.position.x = 2 * player.radius;
-    else
+    } else {
       player.position.x -= playerSpeedLimit;
+    }
   }
   if (keys[1]) { //RIGHT
     if (isRightBound(player)) {
@@ -107,15 +137,19 @@ void controlPlayer() {
  */
 void keyPressed() {
   if (key == CODED) {
-    if (keyCode == LEFT)
+    if (keyCode == LEFT) {
       keys[0] = true;
-    if (keyCode == RIGHT)
+    }
+    if (keyCode == RIGHT) {
       keys[1] = true;
-    if (keyCode == 61440) //printScreen
+    }
+    if (keyCode == 61440) { //printScreen
       saveFrame("data/" + System.currentTimeMillis() + ".jpg");
+    }
   }
-  if (key == 'f' || key == 'F' || key == ' ')
+  if (key == 'f' || key == 'F' || key == ' ') {
     keys[2] = true;
+  }
 }
 
 /**
@@ -123,56 +157,43 @@ void keyPressed() {
  */
 void keyReleased() {
   if (key == CODED) {
-    if (keyCode == LEFT)
+    if (keyCode == LEFT) {
       keys[0] = false;
-    if (keyCode == RIGHT)
+    }
+    if (keyCode == RIGHT) {
       keys[1] = false;
+    }
   }
-  if (key == 'f' || key == 'F')
+  if (key == 'f' || key == 'F') {
     keys[2] = false;
+  }
 }
 
-//object is bound by left edge of screen
+/**
+ * PREVENT PLAYER EXITING VIEW AT GAME LEFT
+ */
 boolean isLeftBound(AbstractSprite sprite) {
   int leftBoundary = 2 * sprite.radius;
-  if (sprite.position.x <= leftBoundary)
+  if (sprite.position.x <= leftBoundary) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
-//object is bound by right edge of screen
+/**
+ * PREVENT PLAYER EXITING VIEW AT GAME RIGHT
+ */
 boolean isRightBound(AbstractSprite sprite) {
   int rightBoundary = width - 2 * sprite.radius;
-  if (sprite.position.x >= rightBoundary)
+  if (sprite.position.x >= rightBoundary) {
     return true;
-  else
+  } else {
     return false;
-}
-
-//shows player lives in bottom left corner
-void showPlayerLives() {
-  for (int i = 0; i < playerLives; i++) {
-    shape(lifeIcon, 60 + i * 100, height - 40);
   }
 }
 
-//ends the game!
-void endGame(String condition) {
-  if(condition.equals("lose")) {
-    cursor();
-    textAlign(CENTER);
-    textSize(48);
-    text("Game Over", width/2, height/2);
-    noLoop();
-  } else if(condition.equals("win")) {
-    cursor();
-    textAlign(CENTER);
-    textSize(48);
-    text("You Beat the Game", width/2, height/2);
-    noLoop();    
-  }
-}
+
 
 
 

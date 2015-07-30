@@ -1,3 +1,9 @@
+/**
+ * PROVIDES FACTORY METHODS TO BUILD GAME OBJECTS
+ * requires instantiation before use, does not provide static methods
+ * main motivation for this class is to reduce cost complexity by drawing objects only one 
+ * time during construction and preventing redraw every frame during the main draw loop
+ */
 class ShapeFactory {
 
   PShape basicBullet;
@@ -10,6 +16,10 @@ class ShapeFactory {
   int basicEnemyRadius;
   int basicPlayerRadius;
 
+  /**
+   * DEFAULT CONSTRUCTOR
+   * builds the basic objects one time, saves cost against building during every frame in the main draw loop
+   */
   ShapeFactory() {
     noStroke();
     buildBasicBullet();
@@ -19,6 +29,10 @@ class ShapeFactory {
     buildEnemyThree();
   }
 
+  /**
+   * METHODS THAT RETURN GRAPHICS FOR GAME SPRITES
+   * return a variety of game objects built during this factory class construction
+   */
   PShape getBasicBullet() { 
     return basicBullet;
   }
@@ -35,6 +49,9 @@ class ShapeFactory {
     return enemyThree;
   }
 
+  /**
+   * HIT BOX RADII
+   */
   int getBasicBulletRadius() { 
     return basicBulletRadius;
   }
@@ -45,6 +62,9 @@ class ShapeFactory {
     return basicPlayerRadius;
   }
 
+  /**
+   * METHODS THAT GENERATE GRAPHICS FOR GAME SPRITES
+   */
   void buildBasicBullet() {
     basicBulletRadius = 20;
     basicBullet = createShape(ELLIPSE, -10, -10, 20, 20);

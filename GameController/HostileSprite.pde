@@ -1,16 +1,21 @@
+/**
+ * THE PLAYER AND THE COMPUTER CONTROLLED ENEMIES
+ */
 class HostileSprite extends AbstractSprite {
   int team;
-  long shotTime = 0;
+  long shotTime = 0; //records the last shot fired in millisecond time, used to check if another shot is ready after fireDelay below
   long fireDelay = 300; //ms
 
-  //constructor
+  //LOADED CONSTRUCTOR
   HostileSprite(int team, int radius, PShape graphic, PVector position, PVector velocity) {
     super(position, velocity);
     this.team = team;
     create(graphic, radius);
   }
 
-  //fire in a direction
+  /**
+   * SEND PROJECTILE ALONG ANY VELOCITY VECTOR
+   */
   void fire(PVector projectileVelocity) {
     if (readyToFire()) {
       PShape graphic = factory.getBasicBullet();
@@ -23,7 +28,10 @@ class HostileSprite extends AbstractSprite {
     }
   }
   
-  //fire at a specific target
+  /**
+   * AIM AT A TARGET AND SHOOT
+   * calculates velocity vectors by way of pythagorean theorem
+   */
   void fire(HostileSprite target, int speed) {
     speed = 10 * speed;
     if(readyToFire()) {
@@ -51,13 +59,16 @@ class HostileSprite extends AbstractSprite {
     }
   }
 
-  //check if sprite can fire
+  /**
+   * FOR EVERY FIRE DELAY THAT PASSES, A NEW OPPORTUNITY TO FIRE IS MADE AVAILABLE
+   */
   boolean readyToFire() {
     long now = millis(); //ms time since game started
-    if (now > shotTime + fireDelay)
+    if (now > shotTime + fireDelay) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 }
 

@@ -1,17 +1,24 @@
+/**
+ * PROJECTILE SPRITES FLY AROUND THE GAME SCREEN CHECKING FOR COLLISIONS
+ */
 class ProjectileSprite extends AbstractSprite {
 
-  HostileSprite shooter;
+  HostileSprite shooter; //the sprite that the projectile came from (has a team)
 
-  //constructor
+  /**
+   * LOADED CONSTRUCTOR
+   */
   ProjectileSprite(HostileSprite shooter, int radius, PShape graphic, PVector position, PVector velocity) {
     super(position, velocity);
     this.shooter = shooter;
     this.create(graphic, radius);
   }
 
-  //override the AbstractSprite.update - to check for collisions
+  /**
+   * OVERRIDE THE ABSTRACT SUPER CLASS: ADD FUNCTIONALITY TO CHECK FOR COLLISIONS
+   */ 
   @Override
-    void update() {
+  void update() {
     position.add(velocity);
     checkCollisions();
     if (this.position.y < -this.radius) {
@@ -19,7 +26,9 @@ class ProjectileSprite extends AbstractSprite {
     }
   }
 
-  //check collision against every sprite in display
+  /**
+   * MODIFIES GAME STATS WHEN COLLISIONS OCCUR. PLAYERS LOSE LIVES, ENEMIES ARE REMOVED FROM DRAW LIST
+   */
   void checkCollisions() {
     for (int i = 0; i < enemies.size (); i++) {
       HostileSprite enemy = (HostileSprite)enemies.get(i);

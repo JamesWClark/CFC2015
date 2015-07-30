@@ -1,9 +1,14 @@
+/**
+ * ABSTRACT LEVEL PROVIDES FUNCTIONS FOR USE IN THE GAME CONTROLLER'S SETUP AND DRAW
+ */
 abstract class AbstractLevel implements Level {
 
   abstract void levelSetup();
   abstract void levelDraw();
 
-  //advance the games by level
+  /**
+   * ADVANCES TO THE NEXT LEVEL, CLEARS ALL PROJECTILES ON SCREEN, ANIMATES A LEVEL TRANSITION
+   */
   void advance() {
     lockedControls = true;
     //remove all projectiles
