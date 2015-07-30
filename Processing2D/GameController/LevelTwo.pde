@@ -1,18 +1,24 @@
+/**
+ * LEVEL TWO - CONCRETE IMPLEMENTATION OF A LEVEL
+ */
 class LevelTwo extends AbstractLevel {
 
   boolean intro = true;
   long timeSinceLastEnemyShot = 0;
   long enemyShotDelay = 300; //ms
 
+  //DEFAULT CONSTRUCTOR
   LevelTwo() {
   }
 
+  //LOCK CONTROLS, SET PLAYER POSITION AND SPEED
   void levelSetup() {
     lockedControls = true;
     player.position = new PVector(0.5 * width, height + 6 * player.radius);
     player.velocity = new PVector(0, -3);
   }
 
+  //CALLED REPEATEDLY IN MAIN DRAW LOOP
   void levelDraw() {
     if (intro)
       playIntro();
@@ -20,6 +26,7 @@ class LevelTwo extends AbstractLevel {
       fight();
   }
 
+  //ANIMATE PLAYER FLYING IN
   void playIntro() {
     if (player.position.y <= playerControllerLine) {
       player.velocity = new PVector(0, 0);
@@ -30,12 +37,14 @@ class LevelTwo extends AbstractLevel {
     }
   }
 
+  //COMMENCE BATTLE UNTIL THE LEVEL IS COMPLETE
   void fight() {
     automateEnemies();
     if (levelIsComplete())
       advance();
   }
 
+  //CREATE A COLLECTION OF ENEMIES
   void spawnEnemies() {
     int radius = factory.getBasicEnemyRadius();
     int enemyRows = 4;
@@ -65,6 +74,7 @@ class LevelTwo extends AbstractLevel {
     }
   }
 
+  //A LEVEL IS COMPLETE WHEN THE ENEMIES COLLECTION IS BIGGER THAN 1 OR DOES NOT CONTAIN THE PLAYER
   boolean levelIsComplete() {
     if (enemies.size() > 1 && enemies.contains(player)) {
       return false;

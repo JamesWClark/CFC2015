@@ -1,18 +1,24 @@
+/**
+ * LEVEL ONE - CONCRETE IMPLEMENTATION OF A LEVEL
+ */
 class LevelOne extends AbstractLevel {
 
   boolean intro = true;
   long timeSinceLastEnemyShot = 0;
   long enemyShotDelay = 400; //ms
   
+  //DEFAULT CONSTRUCTOR
   LevelOne() {
   }
 
+  //LOCK CONTROLS, SET PLAYER POSITION AND SPEED
   void levelSetup() {
     lockedControls = true;
     player.position = new PVector(0.5 * width, height + 6 * player.radius);
     player.velocity = new PVector(0, -3);
   }
-
+  
+  //CALLED REPEATEDLY IN MAIN DRAW LOOP
   void levelDraw() {
     if (intro)
       playIntro();
@@ -20,6 +26,7 @@ class LevelOne extends AbstractLevel {
       fight();
   }
 
+  //ANIMATE PLAYER FLYING IN
   void playIntro() {
     if (player.position.y <= playerControllerLine) {
       player.velocity = new PVector(0, 0);
@@ -30,6 +37,7 @@ class LevelOne extends AbstractLevel {
     }
   }
 
+  //COMMENCE BATTLE UNTIL THE LEVEL IS COMPLETE
   void fight() {
     automateEnemies();
     if (levelIsComplete()) {
@@ -37,6 +45,7 @@ class LevelOne extends AbstractLevel {
     }
   }
 
+  //CREATE A COLLECTION OF ENEMIES
   void spawnEnemies() {
     int radius = factory.getBasicEnemyRadius();
     int enemyRows = 4;
@@ -54,7 +63,7 @@ class LevelOne extends AbstractLevel {
   }
 
   /**
-   * AUTOMATE THE ENEMIES
+   * AUTOMATE THE ENEMIES (THEY MOVE LEFT AND RIGHT SHOOTING AT THE PLAYER)
    */
   void automateEnemies() {
     long now = millis();
@@ -66,6 +75,7 @@ class LevelOne extends AbstractLevel {
     }
   }
 
+  //A LEVEL IS COMPLETE WHEN THE ENEMIES COLLECTION IS BIGGER THAN 1 OR DOES NOT CONTAIN THE PLAYER
   boolean levelIsComplete() {
     if (enemies.size() > 1 && enemies.contains(player)) {
       return false;
