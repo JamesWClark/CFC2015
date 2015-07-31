@@ -45,24 +45,3 @@ class ProjectileSprite extends AbstractSprite {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -59,10 +59,10 @@ abstract class AbstractSprite implements Sprite {
   /**
    * CHECK CIRCLE-CIRCLE COLLISION BY RADIUS
    */
-  boolean isColliding(ProjectileSprite projectile, HostileSprite hostile) {
-    float dx = projectile.position.x - hostile.position.x;
-    float dy = projectile.position.y - hostile.position.y;
-    float rr = projectile.radius + hostile.radius;
+  boolean isColliding(AbstractSprite a, AbstractSprite b) {
+    float dx = a.position.x - b.position.x;
+    float dy = a.position.y - b.position.y;
+    float rr = a.radius + b.radius;
     if (dx * dx + dy * dy < rr * rr) {
       return true;
     } else {

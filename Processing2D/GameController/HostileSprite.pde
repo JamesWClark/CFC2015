@@ -21,7 +21,7 @@ class HostileSprite extends AbstractSprite {
       PShape graphic = factory.getBasicBullet();
       PVector position = new PVector(this.position.x, this.position.y);
       int radius = factory.getBasicBulletRadius();
-      ProjectileSprite projectile = 
+      Sprite projectile = 
           new ProjectileSprite(this, radius, graphic, position, projectileVelocity);
       sprites.add(projectile);
       shotTime = millis();
@@ -32,7 +32,7 @@ class HostileSprite extends AbstractSprite {
    * AIM AT A TARGET AND SHOOT
    * calculates velocity vectors by way of pythagorean theorem
    */
-  void fire(HostileSprite target, int speed) {
+  void fire(AbstractSprite target, int speed) {
     speed = 10 * speed;
     if(readyToFire()) {
       double distance;
